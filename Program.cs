@@ -17,30 +17,21 @@ app.UseHttpsRedirection();
 
 // REST ==> GET, POST, PUT, DELETE
 
-app.MapGet("/", () =>
+app.MapGet("/", () => "API is working fine.");
+
+var products = new List<Product>()
 {
-    return "API is working fine.";
+    new Product("Samsung s20", 1250),
+    new Product("Apple iphone", 1367),
+};
+
+app.MapGet("/products", () =>
+{
+
+    return Results.Ok(products); // 200
 });
 
-app.MapGet("/hello", () =>
-{
-    return "Get method: Hello";
-});
-
-
-app.MapPost("/hello", () =>
-{
-    return "POST method: Hello";
-});
-
-app.MapPut("/hello", () =>
-{
-    return "PUT method: Hello";
-});
-
-app.MapDelete("/hello", () =>
-{
-    return "DELETE method: Hello";
-});
 
 app.Run();
+
+public record Product(string Name, decimal Price);
