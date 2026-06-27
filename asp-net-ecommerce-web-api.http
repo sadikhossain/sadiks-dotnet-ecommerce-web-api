@@ -3,18 +3,18 @@ GET http://localhost:5022
 
 ###
 
-GET http://localhost:5022/products
+GET http://localhost:5022/api/categories
 
 ###
 
-# POST  http://localhost:5022/hello
+POST http://localhost:5022/api/categories
 
-# ###
+###
 
-# PUT  http://localhost:5022/hello
+PUT http://localhost:5022/api/categories
 
-# ###
+###
 
-# DELETE  http://localhost:5022/hello
+DELETE http://localhost:5022/api/categories
 
-# ###
+###
