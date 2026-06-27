@@ -3,18 +3,30 @@ GET http://localhost:5022
 
 ###
 
-GET http://localhost:5022/api/categories
+GET http://localhost:5022/api/categories?searchValue=Guitar
 
 ###
 
 POST http://localhost:5022/api/categories
+Content-Type: application/json
+
+{
+    "name":"Guitar 3",
+    "description":"Nice category"
+}
 
 ###
 
-PUT http://localhost:5022/api/categories
+PUT http://localhost:5022/api/categories/24b9693a-6c25-42fd-a0d3-b05e702eb65b
+Content-Type: application/json
+
+{
+    "name":"Gaming",
+    "description":"Suitable is PS6 category"
+}
 
 ###
 
-DELETE http://localhost:5022/api/categories
+DELETE http://localhost:5022/api/categories/8e5acac7-0c34-4e4c-bf57-4a840cab98f2
 
 ###
