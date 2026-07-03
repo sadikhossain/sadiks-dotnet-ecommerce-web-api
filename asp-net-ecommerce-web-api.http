@@ -15,21 +15,21 @@ Content-Type: application/json
 
 {
     "name":"electronics",
-    "description": ""
+    "description": "This is description"
 }
 
 ###
 
-PUT http://localhost:5022/api/categories/52764bde-f638-489f-b38c-024b569395e0
+PUT http://localhost:5022/api/categories/23b97cd8-f8dc-4ed1-92cf-fb3cad77e12f
 Content-Type: application/json
 
 {
-    "name":"",
+    "name":"Good work",
     "description":""
 }
 
 ###
 
-DELETE http://localhost:5022/api/categories/8f666ce7-ac3d-4431-921f-69198870ee7e
+DELETE http://localhost:5022/api/categories/23b97cd8-f8dc-4ed1-92cf-fb3cad77e12f
 
 ###
