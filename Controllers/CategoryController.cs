@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using asp_net_ecommerce_web_api.DTOs;
 using asp_net_ecommerce_web_api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,18 +18,27 @@ namespace asp_net_ecommerce_web_api.Controllers
         [HttpGet]
         public IActionResult GetCategories([FromQuery] string searchValue = "")
         {
-            if (!string.IsNullOrEmpty(searchValue))
+            // if (!string.IsNullOrEmpty(searchValue))
+            // {
+            //     Console.WriteLine($"{searchValue}");
+            //     var searchCategories = categories.Where(c => c.Name.Contains(searchValue, StringComparison.OrdinalIgnoreCase)).ToList();
+            //     return Ok(searchCategories);
+            // }
+
+            var categoryList = categories.Select(c => new CategoryReadDto
             {
-                Console.WriteLine($"{searchValue}");
-                var searchCategories = categories.Where(c => c.Name.Contains(searchValue, StringComparison.OrdinalIgnoreCase)).ToList();
-                return Ok(searchCategories);
-            }
-            return Ok(categories); // 200
+                CategoryId = c.CategoryId,
+                Name = c.Name,
+                Description = c.Description,
+                CreatedAt = c.CreatedAt
+
+            }).ToList();
+            return Ok(categoryList); // 200
         }
 
         // POST: /api/categories ==> Create category
         [HttpPost]
-        public IActionResult CreateCategory([FromBody] Category categoryData)
+        public IActionResult CreateCategory([FromBody] CategoryCreateDto categoryData)
         {
             if (string.IsNullOrEmpty(categoryData.Name))
             {
@@ -47,12 +57,20 @@ namespace asp_net_ecommerce_web_api.Controllers
                 CreatedAt = DateTime.UtcNow,
             };
             categories.Add(newCategory);
-            return Created($"/api/categories/{newCategory.CategoryId}", newCategory); // 200
+
+            var categoryReadDto = new CategoryReadDto
+            {
+                CategoryId = newCategory.CategoryId,
+                Name = newCategory.Name,
+                Description = newCategory.Description,
+                CreatedAt = newCategory.CreatedAt,
+            };
+            return Created($"/api/categories/{newCategory.CategoryId}", categoryReadDto); // 200
         }
 
         // POST: /api/categories ==> Create category
         [HttpPut("{categoryId:guid}")]
-        public IActionResult UpdateCategoryById(Guid categoryId, [FromBody] Category categoryData)
+        public IActionResult UpdateCategoryById(Guid categoryId, [FromBody] CategoryUpdateDto categoryData)
         {
             if (categoryData == null)
             {

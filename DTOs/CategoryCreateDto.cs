@@ -3,17 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace asp_net_ecommerce_web_api.Models
+namespace asp_net_ecommerce_web_api.DTOs
 {
-    public class Category
+    public class CategoryCreateDto
     {
-        public Guid CategoryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; } = string.Empty;
-        public DateTime CreatedAt { get; set; }
-
     };
 }
-
-
-// Entity ==> Product, Category, Order, User

@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:5022/api/categories/23b97cd8-f8dc-4ed1-92cf-fb3cad77e12f
+PUT http://localhost:5022/api/categories/6f5ad0a1-1bf2-43b2-b653-b03a9f4c4866
 Content-Type: application/json
 
 {
