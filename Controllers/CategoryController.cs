@@ -40,14 +40,19 @@ namespace asp_net_ecommerce_web_api.Controllers
         [HttpPost]
         public IActionResult CreateCategory([FromBody] CategoryCreateDto categoryData)
         {
-            if (string.IsNullOrEmpty(categoryData.Name))
-            {
-                return BadRequest("Category Name is required and can not be empty");
-            }
-            if (categoryData.Name.Length < 2)
-            {
-                return BadRequest("Category name must be at least 2 characters.");
-            }
+            // if (string.IsNullOrEmpty(categoryData.Name))
+            // {
+            //     return BadRequest("Category Name is required and can not be empty");
+            // }
+            // if (categoryData.Name.Length < 2)
+            // {
+            //     return BadRequest("Category name must be at least 2 characters.");
+            // }
+
+            // if (!ModelState.IsValid)
+            // {
+                
+            // }
 
             var newCategory = new Category
             {

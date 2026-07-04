@@ -14,7 +14,7 @@ POST http://localhost:5022/api/categories
 Content-Type: application/json
 
 {
-    "name":"electronics",
+    "name": "S",
     "description": "This is description"
 }
 
