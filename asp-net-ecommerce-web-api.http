@@ -14,22 +14,22 @@ POST http://localhost:5022/api/categories
 Content-Type: application/json
 
 {
-    "name": "S",
+    "name": "Mac book Pro Max",
     "description": "This is description"
 }
 
 ###
 
-PUT http://localhost:5022/api/categories/6f5ad0a1-1bf2-43b2-b653-b03a9f4c4866
+PUT http://localhost:5022/api/categories/814ac7f6-623e-412e-8c72-972cb6107f55
 Content-Type: application/json
 
 {
-    "name":"Good work",
+    "name":"Macbook Ultra Pro Max",
     "description":""
 }
 
 ###
 
-DELETE http://localhost:5022/api/categories/23b97cd8-f8dc-4ed1-92cf-fb3cad77e12f
+DELETE http://localhost:5022/api/categories/814ac7f6-623e-412e-8c72-972cb6107f55
 
 ###

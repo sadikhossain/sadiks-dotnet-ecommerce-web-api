@@ -33,7 +33,7 @@ namespace asp_net_ecommerce_web_api.Controllers
                 CreatedAt = c.CreatedAt
 
             }).ToList();
-            return Ok(categoryList); // 200
+            return Ok(ApiResponse<List<CategoryReadDto>>.SuccessResponse(categoryList, 200, "Categories returned successfully")); // 200
         }
 
         // POST: /api/categories ==> Create category
@@ -70,10 +70,10 @@ namespace asp_net_ecommerce_web_api.Controllers
                 Description = newCategory.Description,
                 CreatedAt = newCategory.CreatedAt,
             };
-            return Created($"/api/categories/{newCategory.CategoryId}", categoryReadDto); // 200
+            return Created($"/api/categories/{newCategory.CategoryId}", ApiResponse<CategoryReadDto>.SuccessResponse(categoryReadDto, 201, "Categories created successfully")); // 200
         }
 
-        // POST: /api/categories ==> Create category
+        // PUT: /api/categories/{categoryId} ==> Update a category
         [HttpPut("{categoryId:guid}")]
         public IActionResult UpdateCategoryById(Guid categoryId, [FromBody] CategoryUpdateDto categoryData)
         {
@@ -106,7 +106,8 @@ namespace asp_net_ecommerce_web_api.Controllers
                 foundCategory.Description = categoryData.Description;
             }
             // categories.Remove(foundCategory);
-            return NoContent();
+            // return NoContent();
+            return Ok(ApiResponse<object>.SuccessResponse(null, 204, "Category updated successfully"));
         }
 
 
@@ -120,7 +121,8 @@ namespace asp_net_ecommerce_web_api.Controllers
                 return NotFound("Category with this id does not exist");
             }
             categories.Remove(foundCategory);
-            return NoContent();
+            // return NoContent();
+            return Ok(ApiResponse<object>.SuccessResponse(null, 204, "Category deleted successfully"));
         }
     }
 }
