@@ -9,6 +9,9 @@ GET http://localhost:5022/api/categories
 GET http://localhost:5022/api/categories?searchValue=Guitar
 
 ###
+GET http://localhost:5022/api/categories/d4b6dd14-4a7b-4565-bd44-9d8345a2b028
+
+###
 
 POST http://localhost:5022/api/categories
 Content-Type: application/json

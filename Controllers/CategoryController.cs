@@ -29,6 +29,25 @@ namespace asp_net_ecommerce_web_api.Controllers
             return Ok(ApiResponse<List<CategoryReadDto>>.SuccessResponse(categoryList, 200, "Categories returned successfully")); // 200
         }
 
+        // GET: /api/categories/{categoryId} ==> Read a category by Id
+        [HttpGet("{categoryId:guid}")]
+        public IActionResult GetCategoryById(Guid categoryId)
+        {
+            var foundCategory = categories.FirstOrDefault(c => c.CategoryId == categoryId);
+            if (foundCategory == null)
+            {
+                return NotFound(ApiResponse<object>.ErrorResponse(new List<string> { "Category with this ID does not exist" }, 404, "Validation failed"));
+            }
+            var categoryReadDto =  new CategoryReadDto
+            {
+                CategoryId = foundCategory.CategoryId,
+                Name = foundCategory.Name,
+                Description = foundCategory.Description,
+                CreatedAt = foundCategory.CreatedAt
+            };
+            return Ok(ApiResponse<CategoryReadDto>.SuccessResponse(categoryReadDto, 200, "Category is returned successfully")); // 200
+        }
+
         // POST: /api/categories ==> Create category
         [HttpPost]
         public IActionResult CreateCategory([FromBody] CategoryCreateDto categoryData)
@@ -60,7 +79,7 @@ namespace asp_net_ecommerce_web_api.Controllers
             var foundCategory = categories.FirstOrDefault(category => category.CategoryId == categoryId);
             if (foundCategory == null)
             {
-                return NotFound(ApiResponse<object>.ErrorResponse(new List<string>{"Category with this ID does not exist"}, 400, "Validation failed"));
+                return NotFound(ApiResponse<object>.ErrorResponse(new List<string> { "Category with this ID does not exist" }, 400, "Validation failed"));
             }
 
             foundCategory.Name = categoryData.Name;
@@ -75,7 +94,7 @@ namespace asp_net_ecommerce_web_api.Controllers
             var foundCategory = categories.FirstOrDefault(category => category.CategoryId == categoryId);
             if (foundCategory == null)
             {
-                return NotFound(ApiResponse<object>.ErrorResponse(new List<string>{"Category with this ID does not exist"}, 404, "Validation failed"));
+                return NotFound(ApiResponse<object>.ErrorResponse(new List<string> { "Category with this ID does not exist" }, 404, "Validation failed"));
             }
             categories.Remove(foundCategory);
             return Ok(ApiResponse<object>.SuccessResponse(null, 204, "Category deleted successfully"));
