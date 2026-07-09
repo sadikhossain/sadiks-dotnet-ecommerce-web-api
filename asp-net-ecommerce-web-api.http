@@ -2,18 +2,18 @@
 GET http://localhost:5022
 
 ###
-GET http://localhost:5022/api/categories
+GET http://localhost:5022/v1/api/categories
 
 ###
 
-GET http://localhost:5022/api/categories?searchValue=Guitar
+GET http://localhost:5022/v1/api/categories?searchValue=Guitar
 
 ###
-GET http://localhost:5022/api/categories/d4b6dd14-4a7b-4565-bd44-9d8345a2b028
+GET http://localhost:5022/v1/api/categories/73cd4654-a290-4cc8-9ce4-5fef5733fa71
 
 ###
 
-POST http://localhost:5022/api/categories
+POST http://localhost:5022/v1/api/categories
 Content-Type: application/json
 
 {
@@ -23,16 +23,17 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:5022/api/categories/814ac7f6-623e-412e-8c72-972cb6107f55
+PUT http://localhost:5022/v1/api/categories/73cd4654-a290-4cc8-9ce4-5fef5733fa71
 Content-Type: application/json
 
 {
     "name":"Macbook Ultra Pro Max",
-    "description":""
+    "description":"good for heavy task"
 }
 
 ###
 
-DELETE http://localhost:5022/api/categories/814ac7f6-623e-412e-8c72-972cb6107f55
+DELETE http://localhost:5022/v1/api/categories/fe1ec52f-ece0-4de6-bc58-5188f9ddb1d9
 
 ###
+

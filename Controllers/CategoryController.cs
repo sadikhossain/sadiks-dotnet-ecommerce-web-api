@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace asp_net_ecommerce_web_api.Controllers
 {
     [ApiController]
-    [Route("api/categories/")]
+    [Route("v1/api/categories/")]
     public class CategoryController : ControllerBase
     {
         private static List<Category> categories = new List<Category>();
 
-        // GET: /api/categories ==> Read categories
+        // GET: /v1/api/categories ==> Read categories
         [HttpGet]
         public IActionResult GetCategories([FromQuery] string searchValue = "")
         {
@@ -29,7 +29,7 @@ namespace asp_net_ecommerce_web_api.Controllers
             return Ok(ApiResponse<List<CategoryReadDto>>.SuccessResponse(categoryList, 200, "Categories returned successfully")); // 200
         }
 
-        // GET: /api/categories/{categoryId} ==> Read a category by Id
+        // GET: /v1/api/categories/{categoryId} ==> Read a category by Id
         [HttpGet("{categoryId:guid}")]
         public IActionResult GetCategoryById(Guid categoryId)
         {
@@ -48,7 +48,7 @@ namespace asp_net_ecommerce_web_api.Controllers
             return Ok(ApiResponse<CategoryReadDto>.SuccessResponse(categoryReadDto, 200, "Category is returned successfully")); // 200
         }
 
-        // POST: /api/categories ==> Create category
+        // POST: /v1/api/categories ==> Create category
         [HttpPost]
         public IActionResult CreateCategory([FromBody] CategoryCreateDto categoryData)
         {
@@ -68,10 +68,10 @@ namespace asp_net_ecommerce_web_api.Controllers
                 Description = newCategory.Description,
                 CreatedAt = newCategory.CreatedAt,
             };
-            return Created($"/api/categories/{newCategory.CategoryId}", ApiResponse<CategoryReadDto>.SuccessResponse(categoryReadDto, 201, "Categories created successfully")); // 200
+            return Created(nameof(GetCategoryById), ApiResponse<CategoryReadDto>.SuccessResponse(categoryReadDto, 201, "Categories created successfully")); // 200
         }
 
-        // PUT: /api/categories/{categoryId} ==> Update a category
+        // PUT: /v1/api/categories/{categoryId} ==> Update a category
         [HttpPut("{categoryId:guid}")]
         public IActionResult UpdateCategoryById(Guid categoryId, [FromBody] CategoryUpdateDto categoryData)
         {
@@ -87,7 +87,7 @@ namespace asp_net_ecommerce_web_api.Controllers
             return Ok(ApiResponse<object>.SuccessResponse(null, 204, "Category updated successfully"));
         }
 
-        // DELETE: /api/categories/{categoryId} ==> Delete a category by Id
+        // DELETE: /v1/api/categories/{categoryId} ==> Delete a category by Id
         [HttpDelete("{categoryId:guid}")]
         public IActionResult DeleteCategoryById(Guid categoryId)
         {
@@ -101,3 +101,10 @@ namespace asp_net_ecommerce_web_api.Controllers
         }
     }
 }
+
+// 1. Descriptive name
+// 2. plurals
+// 3. plurals/{singularNoun} ==> categories/{categoryId}
+// 4. use hypens for multiple words for improving the readability ==> /product-categories
+// 5. versioning 
+// 6. avoid verbs in url path ==> not --> /createCategory , instead --> POST  /category
