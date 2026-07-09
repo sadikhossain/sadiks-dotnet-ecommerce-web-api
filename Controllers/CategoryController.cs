@@ -56,35 +56,17 @@ namespace asp_net_ecommerce_web_api.Controllers
         [HttpPut("{categoryId:guid}")]
         public IActionResult UpdateCategoryById(Guid categoryId, [FromBody] CategoryUpdateDto categoryData)
         {
-            if (categoryData == null)
-            {
-                return BadRequest("Category data is missing");
-            }
 
             var foundCategory = categories.FirstOrDefault(category => category.CategoryId == categoryId);
             if (foundCategory == null)
             {
-                return NotFound("Category with this id does not exist");
+                return NotFound(ApiResponse<object>.ErrorResponse(new List<string>{"Category with this ID does not exist"}, 400, "Validation failed"));
             }
 
-            if (!string.IsNullOrEmpty(categoryData.Name))
-            {
-                if (categoryData.Name.Length > 2)
-                {
-                    foundCategory.Name = categoryData.Name;
-                }
-                else
-                {
-                    return BadRequest("Category name must be at least 2 characters.");
-                }
-            }
-            if (!string.IsNullOrWhiteSpace(categoryData.Description))
-            {
-                foundCategory.Description = categoryData.Description;
-            }
+            foundCategory.Name = categoryData.Name;
+            foundCategory.Description = categoryData.Description;
             return Ok(ApiResponse<object>.SuccessResponse(null, 204, "Category updated successfully"));
         }
-
 
         // DELETE: /api/categories/{categoryId} ==> Delete a category by Id
         [HttpDelete("{categoryId:guid}")]
@@ -93,7 +75,7 @@ namespace asp_net_ecommerce_web_api.Controllers
             var foundCategory = categories.FirstOrDefault(category => category.CategoryId == categoryId);
             if (foundCategory == null)
             {
-                return NotFound("Category with this id does not exist");
+                return NotFound(ApiResponse<object>.ErrorResponse(new List<string>{"Category with this ID does not exist"}, 404, "Validation failed"));
             }
             categories.Remove(foundCategory);
             return Ok(ApiResponse<object>.SuccessResponse(null, 204, "Category deleted successfully"));
