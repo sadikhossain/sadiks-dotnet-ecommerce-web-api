@@ -18,13 +18,6 @@ namespace asp_net_ecommerce_web_api.Controllers
         [HttpGet]
         public IActionResult GetCategories([FromQuery] string searchValue = "")
         {
-            // if (!string.IsNullOrEmpty(searchValue))
-            // {
-            //     Console.WriteLine($"{searchValue}");
-            //     var searchCategories = categories.Where(c => c.Name.Contains(searchValue, StringComparison.OrdinalIgnoreCase)).ToList();
-            //     return Ok(searchCategories);
-            // }
-
             var categoryList = categories.Select(c => new CategoryReadDto
             {
                 CategoryId = c.CategoryId,
@@ -40,20 +33,6 @@ namespace asp_net_ecommerce_web_api.Controllers
         [HttpPost]
         public IActionResult CreateCategory([FromBody] CategoryCreateDto categoryData)
         {
-            // if (string.IsNullOrEmpty(categoryData.Name))
-            // {
-            //     return BadRequest("Category Name is required and can not be empty");
-            // }
-            // if (categoryData.Name.Length < 2)
-            // {
-            //     return BadRequest("Category name must be at least 2 characters.");
-            // }
-
-            // if (!ModelState.IsValid)
-            // {
-                
-            // }
-
             var newCategory = new Category
             {
                 CategoryId = Guid.NewGuid(),
@@ -88,8 +67,6 @@ namespace asp_net_ecommerce_web_api.Controllers
                 return NotFound("Category with this id does not exist");
             }
 
-            // foundCategory.Name = categoryData.Name ?? foundCategory.Name;
-            // foundCategory.Description = categoryData.Description ?? foundCategory.Description;
             if (!string.IsNullOrEmpty(categoryData.Name))
             {
                 if (categoryData.Name.Length > 2)
@@ -105,8 +82,6 @@ namespace asp_net_ecommerce_web_api.Controllers
             {
                 foundCategory.Description = categoryData.Description;
             }
-            // categories.Remove(foundCategory);
-            // return NoContent();
             return Ok(ApiResponse<object>.SuccessResponse(null, 204, "Category updated successfully"));
         }
 
@@ -121,7 +96,6 @@ namespace asp_net_ecommerce_web_api.Controllers
                 return NotFound("Category with this id does not exist");
             }
             categories.Remove(foundCategory);
-            // return NoContent();
             return Ok(ApiResponse<object>.SuccessResponse(null, 204, "Category deleted successfully"));
         }
     }
