@@ -1,3 +1,4 @@
+using asp_net_ecommerce_web_api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,19 +15,10 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.InvalidModelStateResponseFactory = context =>
     {
         var errors = context.ModelState
-                  .Where(e => e.Value != null && e.Value.Errors.Count > 0)
-                  .Select(e => new
-                  {
-                      Feild = e.Key,
-                      Errors = e.Value != null ? e.Value.Errors.Select(x => x.ErrorMessage).ToArray() : new string[0]
-                  }).ToList();
+          .Where(e => e.Value != null && e.Value.Errors.Count > 0)
+          .SelectMany(e => e.Value.Errors.Select(x => x.ErrorMessage)).ToList();
 
-        // var errorString = string.Join("; ", errors.Select(e => $"{e.Feild} : {string.Join(", ", e.Errors)}"));
-        return new BadRequestObjectResult(new
-        {
-            Message = "Validation failed",
-            Errors = errors
-        });
+        return new BadRequestObjectResult(ApiResponse<object>.ErrorResponse(errors, 400, "Validation failed"));
     };
 });
 

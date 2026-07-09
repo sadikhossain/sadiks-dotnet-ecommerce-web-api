@@ -28,8 +28,13 @@ namespace asp_net_ecommerce_web_api.Controllers
         // static method for creating a successful response
         public static ApiResponse<T> SuccessResponse(T data, int statuscode, string message = "")
         {
-            return new ApiResponse<T> (true, message, data, null, statuscode);
+            return new ApiResponse<T>(true, message, data, null, statuscode);
         }
-        // constructor for error response
+
+        // static method for creating an error response
+        public static ApiResponse<T> ErrorResponse(List<string> errors, int statuscode, string message = "")
+        {
+            return new ApiResponse<T>(false, message, default(T), errors, statuscode);
+        }
     }
 }
