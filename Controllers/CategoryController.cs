@@ -48,34 +48,32 @@ namespace asp_net_ecommerce_web_api.Controllers
             return Created(nameof(GetCategoryById), ApiResponse<CategoryReadDto>.SuccessResponse(categoryReadDto, 201, "Categories created successfully")); // 200
         }
 
-        // // PUT: /v1/api/categories/{categoryId} ==> Update a category
-        // [HttpPut("{categoryId:guid}")]
-        // public IActionResult UpdateCategoryById(Guid categoryId, [FromBody] CategoryUpdateDto categoryData)
-        // {
+        // PUT: /v1/api/categories/{categoryId} ==> Update a category
+        [HttpPut("{categoryId:guid}")]
+        public IActionResult UpdateCategoryById(Guid categoryId, [FromBody] CategoryUpdateDto categoryData)
+        {
 
-        //     var foundCategory = categories.FirstOrDefault(category => category.CategoryId == categoryId);
-        //     if (foundCategory == null)
-        //     {
-        //         return NotFound(ApiResponse<object>.ErrorResponse(new List<string> { "Category with this ID does not exist" }, 400, "Validation failed"));
-        //     }
+            var updateCategory = _categoryService.UpdateCategoryById(categoryId, categoryData);
+            if (updateCategory == null)
+            {
+                return NotFound(ApiResponse<object>.ErrorResponse(new List<string> { "Category with this ID does not exist" }, 400, "Validation failed"));
+            }
 
-        //     foundCategory.Name = categoryData.Name;
-        //     foundCategory.Description = categoryData.Description;
-        //     return Ok(ApiResponse<object>.SuccessResponse(null, 204, "Category updated successfully"));
-        // }
+            return Ok(ApiResponse<CategoryReadDto>.SuccessResponse(updateCategory, 200, "Category updated successfully"));
+        }
 
         // // DELETE: /v1/api/categories/{categoryId} ==> Delete a category by Id
-        // [HttpDelete("{categoryId:guid}")]
-        // public IActionResult DeleteCategoryById(Guid categoryId)
-        // {
-        //     var foundCategory = categories.FirstOrDefault(category => category.CategoryId == categoryId);
-        //     if (foundCategory == null)
-        //     {
-        //         return NotFound(ApiResponse<object>.ErrorResponse(new List<string> { "Category with this ID does not exist" }, 404, "Validation failed"));
-        //     }
-        //     categories.Remove(foundCategory);
-        //     return Ok(ApiResponse<object>.SuccessResponse(null, 204, "Category deleted successfully"));
-        // }
+        [HttpDelete("{categoryId:guid}")]
+        public IActionResult DeleteCategoryById(Guid categoryId)
+        {
+            
+            var foundCategory = _categoryService.DeleteCategoryById(categoryId);
+            if (!foundCategory)
+            {
+                return NotFound(ApiResponse<object>.ErrorResponse(new List<string> { "Category with this ID does not exist" }, 404, "Validation failed"));
+            }
+            return Ok(ApiResponse<object>.SuccessResponse(null, 204, "Category deleted successfully"));
+        }
     }
 }
 

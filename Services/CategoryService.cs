@@ -61,9 +61,35 @@ namespace asp_net_ecommerce_web_api.Services
             };
         }
 
-        // public CategoryReadDto CreateCategory(CategoryCreateDto categoryData)
-        // {
-            
-        // }
+        public CategoryReadDto? UpdateCategoryById(Guid categoryId, CategoryUpdateDto categoryData)
+        {
+            var foundCategory = _categories.FirstOrDefault(category => category.CategoryId == categoryId);
+            if (foundCategory == null)
+            {
+                return null;
+            }
+
+            foundCategory.Name = categoryData.Name;
+            foundCategory.Description = categoryData.Description;
+
+            return new CategoryReadDto
+            {
+                CategoryId = foundCategory.CategoryId,
+                Name = foundCategory.Name,
+                Description = foundCategory.Description,
+                CreatedAt = foundCategory.CreatedAt,
+            };
+        }
+
+        public bool DeleteCategoryById(Guid categoryId)
+        {
+            var foundCategory = _categories.FirstOrDefault(category => category.CategoryId == categoryId);
+            if (foundCategory == null)
+            {
+                return false;
+            }
+            _categories.Remove(foundCategory);
+            return true;
+        }
     }
 }
