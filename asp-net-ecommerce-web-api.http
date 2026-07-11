@@ -9,7 +9,7 @@ GET http://localhost:5022/v1/api/categories
 GET http://localhost:5022/v1/api/categories?searchValue=Guitar
 
 ###
-GET http://localhost:5022/v1/api/categories/73cd4654-a290-4cc8-9ce4-5fef5733fa71
+GET http://localhost:5022/v1/api/categories/8ac88772-7a06-4b5f-8203-60458bce2dd1
 
 ###
 
@@ -17,13 +17,13 @@ POST http://localhost:5022/v1/api/categories
 Content-Type: application/json
 
 {
-    "name": "Mac book Pro Max",
+    "name": "Smart Phone",
     "description": "This is description"
 }
 
 ###
 
-PUT http://localhost:5022/v1/api/categories/73cd4654-a290-4cc8-9ce4-5fef5733fa71
+PUT http://localhost:5022/v1/api/categories/8ac88772-7a06-4b5f-8203-60458bce2dd1
 Content-Type: application/json
 
 {
@@ -33,7 +33,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:5022/v1/api/categories/fe1ec52f-ece0-4de6-bc58-5188f9ddb1d9
+DELETE http://localhost:5022/v1/api/categories/8ac88772-7a06-4b5f-8203-60458bce2dd1
 
 ###
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using asp_net_ecommerce_web_api.DTOs;
+using asp_net_ecommerce_web_api.Interfaces;
 using asp_net_ecommerce_web_api.Models;
 using asp_net_ecommerce_web_api.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +15,8 @@ namespace asp_net_ecommerce_web_api.Controllers
     public class CategoryController : ControllerBase
     {
         
-        private CategoryService _categoryService;
-        public CategoryController(CategoryService categoryService)
+        private ICategoryService _categoryService;
+        public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }

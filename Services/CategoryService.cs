@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using asp_net_ecommerce_web_api.Controllers;
 using asp_net_ecommerce_web_api.DTOs;
+using asp_net_ecommerce_web_api.Interfaces;
 using asp_net_ecommerce_web_api.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace asp_net_ecommerce_web_api.Services
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
         private static readonly List<Category> _categories = new List<Category>();
         public List<CategoryReadDto> GetAllCategories()
