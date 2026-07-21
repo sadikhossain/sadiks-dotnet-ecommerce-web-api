@@ -31,7 +31,7 @@ namespace asp_net_ecommerce_web_api.Services
 
         public async Task<CategoryReadDto?> GetCategoryById(Guid categoryId)
         {
-            var foundCategory = await _appDbContext.Categories.FirstOrDefaultAsync(c => c.CategoryId == categoryId);
+            var foundCategory = await _appDbContext.Categories.FindAsync(categoryId);
 
             return foundCategory == null ? null : _mapper.Map<CategoryReadDto>(foundCategory);
         }
@@ -49,7 +49,7 @@ namespace asp_net_ecommerce_web_api.Services
 
         public async Task<CategoryReadDto?> UpdateCategoryById(Guid categoryId, CategoryUpdateDto categoryData)
         {
-            var foundCategory = await _appDbContext.Categories.FirstOrDefaultAsync(category => category.CategoryId == categoryId);
+            var foundCategory = await _appDbContext.Categories.FindAsync(categoryId);
             if (foundCategory == null)
             {
                 return null;
@@ -66,7 +66,7 @@ namespace asp_net_ecommerce_web_api.Services
 
         public async Task<bool> DeleteCategoryById(Guid categoryId)
         {
-            var foundCategory = await _appDbContext.Categories.FirstOrDefaultAsync(category => category.CategoryId == categoryId);
+            var foundCategory = await _appDbContext.Categories.FindAsync(categoryId);
             if (foundCategory == null)
             {
                 return false;
