@@ -8,10 +8,10 @@ namespace asp_net_ecommerce_web_api.Interfaces
 {
     public interface ICategoryService
     {
-        List<CategoryReadDto> GetAllCategories();
-        CategoryReadDto? GetCategoryById(Guid categoryId);
-        CategoryReadDto CreateCategory(CategoryCreateDto categoryData);
-        CategoryReadDto? UpdateCategoryById(Guid categoryId, CategoryUpdateDto categoryData);
-        bool DeleteCategoryById(Guid categoryId);
+        Task<List<CategoryReadDto>> GetAllCategories();
+        Task<CategoryReadDto?> GetCategoryById(Guid categoryId);
+        Task<CategoryReadDto> CreateCategory(CategoryCreateDto categoryData);
+        Task<CategoryReadDto?> UpdateCategoryById(Guid categoryId, CategoryUpdateDto categoryData);
+        Task<bool> DeleteCategoryById(Guid categoryId);
     }
 }

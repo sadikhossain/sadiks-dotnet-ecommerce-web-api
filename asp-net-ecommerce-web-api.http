@@ -17,13 +17,13 @@ POST http://localhost:5022/v1/api/categories
 Content-Type: application/json
 
 {
-    "name": "Smart Phone",
+    "name": "Smart Bus",
     "description": "This is description"
 }
 
 ###
 
-PUT http://localhost:5022/v1/api/categories/8ac88772-7a06-4b5f-8203-60458bce2dd1
+PUT http://localhost:5022/v1/api/categories/374fdac2-c7ba-463d-9620-8fe2b9b65ea7
 Content-Type: application/json
 
 {
